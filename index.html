@@ -60,16 +60,20 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
-  html, body { min-height: 100%; background: #15161a; font-family: 'SN Pro', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', sans-serif; color: var(--text); }
-  body { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; overflow: auto; }
+  html, body { min-height: 100%; background: var(--canvas); font-family: 'SN Pro', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', sans-serif; color: var(--text); }
+  body { display: flex; align-items: stretch; justify-content: stretch; min-height: 100vh; padding: 0; overflow: hidden; }
   .tnum { font-variant-numeric: tabular-nums; }
 
-  /* 固定 375×812 iPhone 预览框 */
+  /* 真机满屏自适应（消除黑边）；桌面 ≥480 才显示 375×812 居中预览框 */
   #app {
-    position: relative; width: 375px; height: 812px; flex-shrink: 0;
+    position: relative; width: 100%; height: 100vh; height: 100dvh; flex-shrink: 0;
     background: var(--canvas);
     display: flex; flex-direction: column; overflow: hidden;
-    border-radius: 44px; box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  }
+  @media (min-width: 480px) {
+    html, body { background: #15161a; }
+    body { align-items: center; justify-content: center; padding: 24px; overflow: auto; }
+    #app { width: 375px; height: 812px; border-radius: 44px; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
   }
 
   /* —— 全局隐藏滚动条 —— */
